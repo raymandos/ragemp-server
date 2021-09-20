@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+   </head>
+<body>
+  
+  
+  <div class="hero">
+  <div class="form-box">
+    
+    <div class="button-box">
+        <div id="btn"></div>
+        <button type="button" class="toggle-btn" onclick="loginScroll()">Login</button>
+        <button type="button" class="toggle-btn" onclick="registeScroll()">Register</button>
+    </div>
+    <div class="social-icons">
+      <img src="fb.png">
+      <img src="tw.png">
+      <img src="gp.png">
+    </div> 
+    <form id="login" class="input-group">
+      <input id="userLogin" type="text" class="input-field" placeholder="Enter username">
+      <span id="textLoginUsername"></span>
+      <input id="passLogin" type="password" class="input-field" placeholder="Enter password">
+      <span id="textLoginPassword"></span>
+      <input type="checkbox" class="check-box"><span>Verification</span>
+      <button type="button" class="submit-btn" onclick="checkLogin()">Enter</button>
+    </form>
+    <form id="register" class="input-group">
+      <input id="userRegister" type="text" class="input-field" placeholder="Enter username">
+      <span id="textRegisterUsername"></span>
+      <input id="passRegister" type="password" class="input-field" placeholder="Enter Password">
+      <span id="textRegisterPassword"></span>
+      <input type="checkbox" class="check-box"><span>Verification</span>
+      <button type="button" class="submit-btn" onclick="checkRegister()">Register</button>
+    </form>
+  </div>
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>

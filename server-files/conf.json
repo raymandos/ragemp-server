@@ -1,0 +1,9 @@
+{
+	"maxplayers" : 10,
+	"name" : "Ray's Freeroam Server", 
+	"gamemode" : "freeroam", 
+	"stream-distance" : 500.0,
+	"announce" : false,
+	"csharp" : "disabled",
+	"port": 22005
+}
