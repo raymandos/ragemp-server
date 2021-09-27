@@ -21,28 +21,27 @@ function checkRegister() {//Function to check entered data
     let passRegister = document.getElementById("passRegister").value.trim()//Through the ID we show the path to the passRegister input and its value
     setErrorFor(textRegisterUsername, '', '#000')//Function to show error for certain cases
     setErrorFor(textRegisterPassword, '', '#000')//Function to show error for certain cases
-    if(userRegister.length <= 4) {//Валидация никнейма и вывод ошибки в спан
+    if(userRegister.length <= 4) {//Nickname validation and return error in span
         return setErrorFor(textRegisterUsername, 'Username is too short', '#ff0000')
     } 
-    if(passRegister.length <= 4) {//Валидация пароля и вывод ошибки в спан
+    if(passRegister.length <= 4) {//Password validation and return error in span
         return setErrorFor(textRegisterPassword, 'Password is too short', '#ff0000')
     }
-    mp.trigger('registerClient', JSON.stringify({userRegister, passRegister}))//Если всё гуд, то вызов на клиент ивента с внесёнными данными
+    mp.trigger('registerClient', JSON.stringify({userRegister, passRegister}))//If everything's correct, call client event with the data
 }
-//Функция которая будет заносить ошибку в спан.
-//Первым аргументом указывается в какой именно, вторым аргументом - сообщение. Третьим - цвет
+//Function that sets error in span
+//First argument shows which span, second shows message and the third shows colour
 function setErrorFor(textPart, message, color) {
 	textPart.innerHTML = message
 	textPart.style.color = color
 }
-//Эта функция так же заносит в определенный спан ошибку.
-//Но она срабатывает, когда вызывается с клиента на сервер, для валидации данных с БД.
+//Function that also sets error in span
+//But it works when called from client side and checks data in the database
 function showError(textPart, message, color) {
 	textPart.innerHTML = message
 	textPart.style.color = color
 }
-//Не буду на этом заострять внимание. Этот кусок кода является как бы слайдером для перемещения
-//Между формой регистрации и формой авторизации.
+//This part creates a sliding script between login and register forms
 let loginForm = document.getElementById("login")
 let regForm = document.getElementById("register")
 let btn = document.getElementById("btn")

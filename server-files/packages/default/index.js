@@ -15,19 +15,18 @@ mp.events.add('playerJoin', async(player) => {
     player.call('showBrowser')
 })
 
-//Подключаемся к нашей БД со всеми игроками проекта
+//Connect to DB with all the project players
 const playerSchema = require('../mongoDB/models/player-schema')
-//Обрабатываем ивент, когда пользователь отправил форму с данными входа на сервер
+//Create event for when a new player completes the login form
 mp.events.add('loginServer', async(player, logData) => {
-    //Парсим объект данных пользователя
+    //Parse the login data
     logData = JSON.parse(logData)
-    //Ищем в нашей БД игрока с таким же ником, что ввёл пользователь в форму
+    //Search for the login input inside our DB
     await playerSchema.findOne({username: logData.userLogin}, function(err, cb) {
-        //Если такого игрока нет, то в спан выводится ошибка об этом
+        //If such nickname doesn't exist, show error
             if(!cb) player.call('showError', ['textLoginUsername', 'The username does not exist!'])
-            //В противном случае мы сравниваем хэш пароля в БД и указаного пользователем.
-            //Если что-то пошло не так, выводим в спан ошибку.
-            //Заметьте, что мы не подключали здесь библиотеку bcrypt. Все автоматически!
+            //Else, we compare hash password with the input one
+            //If they don't match, push error
             cb.comparePassword(logData.passLogin, function(err, isMatch) {
                 if(isMatch === true){
                     player.call('hideBrowser')
@@ -37,20 +36,19 @@ mp.events.add('loginServer', async(player, logData) => {
             })
         })
 });
-//Обрабатываем ивент, когда пользователь отправил форму с данными регистрации на сервер
+//Create event for when a player completes register form
 mp.events.add('registerServer', async(player, regData) => {
-    //Парсим объект данных пользователя
+    //Parse the register data
     regData = JSON.parse(regData)
-    //Ищем в нашей БД игрока с таким же ником, что ввёл пользователь в форму
+    //Search for the register input inside our DBу
         await playerSchema.findOne({username: regData.userRegister}, function(err,data) {
-            //Если такой игрок есть, то в спан выводится ошибка об этом
+            //If such nickname exists, show error
             if(data) {
                player.call('showError', ['textRegisterUsername', 'This username already exists!'])
             }  else {
-            //В противном случае мы создаём в БД нового пользователя с данными которые он внес.
-            //Так же вызываем ивент, который скроет CEF часть и ТПнет игрока.
-            //Заметьте, что мы не подключали здесь библиотеку bcrypt.
-            //Пароль будет хэширован автоматически.
+            //Else, we create new DB entry with the data
+            //Call event that hides the CEF and teleports the player
+            //Password is automatically hashed
                 player.call('hideBrowser')
                 new playerSchema({
                     username: regData.userRegister,

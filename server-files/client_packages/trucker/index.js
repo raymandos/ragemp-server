@@ -1,13 +1,13 @@
-let colshape; // Невидимый объект для маркера начала работы.
-let colshapeMarker; // Маркер начала работы.
-let trackMarker; // Маркер конечного маршрута.
-let trackColshape; // Невидимый объект конечного маршрута.
-let showWork; // Используется для взаимодействия с CEF-частью.
-let playerLocal = mp.players.local // Переменная с локальными данными игрока (для клиентской стороны)
-let workStatus = 0; // Состояние работы: 0 - не работает; 1 - работает.
-let muleSpawn = { x: -267.8572692871094, y: 2193.226806640625, z: 130.0386199951172, heading: -118.64833068847656} //Координаты спавна машины для работы.
-let trackSpawn = { x: -230.88673400878906, y: 2081.921142578125, z: 138.77877807617188 } //Координаты спавна для маркера разгрузки.
-let redColor = [255,0,0,100] //Для удобства вынес красный цвет в переменную, ибо часто используется.
+let colshape; // Invisible object for marker for start of work
+let colshapeMarker; // Marker for job start
+let trackMarker; // Marker for job end
+let trackColshape; // Invisible object for the track
+let showWork; // For connection with CEF
+let playerLocal = mp.players.local // Connection with player local data
+let workStatus = 0; // Work status: 0 - doesn't work. 1 - is in job process.
+let muleSpawn = { x: -267.8572692871094, y: 2193.226806640625, z: 130.0386199951172, heading: -118.64833068847656} //Coordinated for job vehicle spawn.
+let trackSpawn = { x: -230.88673400878906, y: 2081.921142578125, z: 138.77877807617188 } //Coordinates for job marker
+let redColor = [255,0,0,100] //Chose red colour for the markers and track.
 
 const playerInitWork = (marker) => {
     colshapeSphere = mp.colshapes.newSphere(marker.x, marker.y ,marker.z+1, 2)

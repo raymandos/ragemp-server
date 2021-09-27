@@ -1,11 +1,11 @@
-const mongoose = require('mongoose')//Подключаем модуль mongoose(подключение к mongoDB)
-const bcrypt = require('bcrypt')//Подключаем модуль bcrypt(хэширование)
-//Создаём объект схемы и передаём в него необходимые значения, указывая типы этих данных.
+const mongoose = require('mongoose')//Connect mongoose module
+const bcrypt = require('bcrypt')//Connect bcrypt module 
+//Create Schema object with the necessary fields
 const Schema = mongoose.Schema({
     username: String,
     password: String,
 })
-//Если будет создаваться новая БД, то пароль в ней будет сразу хэширован автоматически.
+//If a new DB is created, password will be automatically hashed
 Schema.pre('save', function(next) {
     if(!this.isModified('password'))
         return next();
@@ -16,13 +16,13 @@ Schema.pre('save', function(next) {
         next()
     })
 })
-//Создание собственного метода для своего рода валидации
-//Хэшированнного пароля и пароля введенного пользователем
+//Create method for validation
+//Between hashed password and entered password
 Schema.methods.comparePassword = function(candidatePassword, cb) {
     bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
         if (err) return cb(err);
         cb(null, isMatch);
     });
 }
-//Экспортирование нашей схемы в БД
+//Export the schema to DB
 module.exports = mongoose.model('player-schema', Schema)

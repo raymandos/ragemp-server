@@ -1,6 +1,6 @@
-const mongo = require('./mongo')//Экспортируем функцию
+const mongo = require('./mongo')//Export function
 
-//Используя встроенный ивент загрузки пакетов, подключаем нашу БД ко всему проекту!
+//Connecting and syncing the DB to the project
 mp.events.add('packagesLoaded', async() => {
     await mongo()
 })

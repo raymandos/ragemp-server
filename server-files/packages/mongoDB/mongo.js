@@ -1,11 +1,11 @@
-const mongoose = require('mongoose')//Подключаем библиотеку mongoose для связи с MongoDB
+const mongoose = require('mongoose')//Connecting mongoose library to sync with MongoDB
 
-module.exports = async() => {//Экспортируем асинхронную функцию.
-    await mongoose.connect('mongodb://localhost:27017/ragemp', {//С помощью метода "connect", подключаемся к MongoDB
-        keepAlive: true,//Своего рода постоянное HTTP соединение.
-        useNewUrlParser: true,//Отключает предупреждение. MongoDB меняет анализатор URL строки
-        useUnifiedTopology: true,//Так же относится к обязательной настройке. Иначе будут предупреждения(soon)
-        useFindAndModify: false//Так же относится к обязательной настройке. Иначе будут предупреждения(soon)
+module.exports = async() => {//Export async function
+    await mongoose.connect('mongodb://localhost:27017/ragemp', {//Using "connect" to connect to MongoDB
+        keepAlive: true,//Keep HTTP connection online
+        useNewUrlParser: true,//Disable error and uses new Url parser
+        useUnifiedTopology: true,//
+        useFindAndModify: false 
     })
-    return mongoose//Возвращаем по сути наше подключение в конце функции.
+    return mongoose//Return the connection to mongoose
 }
